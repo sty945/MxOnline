@@ -22,3 +22,13 @@ class Course(models.Model):
     class Meta:
         verbose_name = u'课程'
         verbose_name_plural = verbose_name
+
+
+class Lesson(models.Model):
+    '''
+    章节信息
+    '''
+    course = models.ForeignKey(Course, verbose_name=u'课程')
+    name = models.CharField(max_length=100, verbose_name=u'章节名')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
+
