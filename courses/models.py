@@ -5,9 +5,9 @@ from django.db import models
 
 # Create your models here.
 class Course(models.Model):
-    '''
+    """
     创建课程的数据库信息表
-    '''
+    """
     name = models.CharField(max_length=50, verbose_name=u'课程名')
     desc = models.CharField(max_length=300, verbose_name=u'课程描述')
     detail = models.TextField(verbose_name=u'课程详情')
@@ -25,19 +25,31 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
-    '''
+    """
     章节信息数据库表
-    '''
+    """
     course = models.ForeignKey(Course, verbose_name=u'课程')
     name = models.CharField(max_length=100, verbose_name=u'章节名')
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
 
 
 class Video(models.Model):
-    '''
+    """
     视频信息数据库信息表
-    '''
+    """
     lesson = models.ForeignKey(Lesson, verbose_name=u'章节')
     name = models.CharField(max_length=100, verbose_name=u'章节名')
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
 
+
+class CourseResources(models.Model):
+    """
+    章节资源数据库信息
+    """
+    course = models.ForeignKey(Course, verbose_name=u'课程')
+    name = models.CharField(max_length=100, verbose_name=u'名称')
+    download = models.FileField(upload_to="course/resource/%Y/%m", verbose_name=u'资源文件', max_length=100)
+
+    class Meta:
+        verbose_name = u'课程资源'
+        verbose_name_plural= verbose_name
