@@ -26,9 +26,18 @@ class Course(models.Model):
 
 class Lesson(models.Model):
     '''
-    章节信息
+    章节信息数据库表
     '''
     course = models.ForeignKey(Course, verbose_name=u'课程')
+    name = models.CharField(max_length=100, verbose_name=u'章节名')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
+
+
+class Video(models.Model):
+    '''
+    视频信息数据库信息表
+    '''
+    lesson = models.ForeignKey(Lesson, verbose_name=u'章节')
     name = models.CharField(max_length=100, verbose_name=u'章节名')
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
 
