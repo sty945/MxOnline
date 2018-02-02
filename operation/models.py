@@ -33,3 +33,18 @@ class CourseComments(models.Model):
     class Meta:
         verbose_name = u'课程评论'
         verbose_name_plural = verbose_name
+
+
+class UserFavorite(models.Model):
+    """
+    用户收藏数据库信息
+    """
+    user = models.ForeignKey(UserProfile, verbose_name=u'用户')
+    fac_id = models.IntegerField(default=0, verbose_name=u'数据id')
+    fav_type = models.IntegerField(choices=((1,u'课程'), (2, u'课程机构'), (3, u'讲师')), default=1, verbose_name=u'收藏类型')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
+
+    class Meta:
+        verbose_name = u'用户收藏'
+        verbose_name_plural = verbose_name
+
