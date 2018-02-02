@@ -75,6 +75,9 @@ class AdminSplitDateTime(forms.SplitDateTimeWidget):
         if DJANGO_11:
             input_html = [ht for ht in super(AdminSplitDateTime, self).render(name, value, attrs).split('\n') if ht != '']
             # return input_html
+            if (len(input_html) > 1):
+                input_html[0] = input_html[0] + "/>"
+                input_html[1] = "<" + input_html[1]
             return mark_safe('<div class="datetime clearfix"><div class="input-group date bootstrap-datepicker"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>%s'
                              '<span class="input-group-btn"><button class="btn btn-default" type="button">%s</button></span></div>'
                              '<div class="input-group time bootstrap-clockpicker"><span class="input-group-addon"><i class="fa fa-clock-o">'
