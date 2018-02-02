@@ -66,3 +66,15 @@ class UserMessage(models.Model):
         verbose_name = u'用户消息'
         verbose_name_plural = verbose_name
 
+
+class UserCourse(models.Model):
+    """
+    用户课程信息数据表
+    """
+    user = models.ForeignKey(UserProfile, verbose_name=u'用户')
+    course = models.ForeignKey(Course, verbose_name=u'课程')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
+
+    class Meta:
+        verbose_name = u'用户消息'
+        verbose_name_plural = verbose_name
