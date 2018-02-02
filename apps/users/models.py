@@ -6,9 +6,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 class UserProfile(AbstractUser):
-    '''
+    """
     用户个人信息
-    '''
+    """
     nick_name = models.CharField(max_length=50, verbose_name=u'呢称', default="")
     birthday = models.DateField(verbose_name=u'生日', null=True, blank=True)
     gender = models.CharField(max_length=7, choices=(("male", u'男'), ("female", u'女')), default="female")
@@ -22,6 +22,7 @@ class UserProfile(AbstractUser):
 
     def __str__(self):
         return self.username
+
 
 class EmailVerifyRecord(models.Model):
     '''
