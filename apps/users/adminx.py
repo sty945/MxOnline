@@ -15,7 +15,7 @@ from .models import EmailVerifyRecord, Banner
 
 class BaseSetting(object):
     enable_themes = True
-    use_booswatch = True
+    use_bootswatch = True
 
 
 class EmailVerifyRecordAdmin(object):
