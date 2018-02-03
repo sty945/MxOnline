@@ -4,6 +4,12 @@
 # 开发环境
 ```
 python 3.6
-django 1.11.9
+django 1.11.0
 mysql 5.7
+xadmin [link](https://github.com/sshwsfc/xadmin)
 ```
+
+# 注意
+目前xadmin能和1.11.0版本兼容的比较好，其他的1.11.+可能有问题
+
+
