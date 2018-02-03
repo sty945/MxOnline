@@ -64,4 +64,4 @@ class CourseResources(models.Model):
 
     class Meta:
         verbose_name = u'课程资源'
-        verbose_name_plural= verbose_name
+        verbose_name_plural = verbose_name
