@@ -2,9 +2,25 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
+from django.views.generic import View
 # Create your views here.
 
 from .models import UserProfile
+
+
+class LoginView(View):
+    def get(self, request):
+        return render(request, "login.html", {})
+
+    def post(self, request):
+        user_name = request.POST.get('username', '')
+        pass_word = request.POST.get('password', '')
+        user = authenticate(username=user_name, password=pass_word)
+        if user is not None:
+            login(request, user)
+            return render(request, "index.html")
+        else:
+            return render(request, "login.html", {"msg": "用户名或密码错误"})
 
 
 class CustomBackend(ModelBackend):
@@ -16,15 +32,3 @@ class CustomBackend(ModelBackend):
         except Exception as e:
             return None
 
-def user_login(request):
-    if request.method == "POST":
-        user_name = request.POST.get('username', '')
-        pass_word = request.POST.get('password', '')
-        user = authenticate(username=user_name, password=pass_word)
-        if user is not None:
-            login(request, user)
-            return render(request, "index.html")
-        else:
-            return render(request, "login.html", {"msg": "用户名或密码错误"})
-    elif request.method == 'GET':
-        return render(request, "login.html")
