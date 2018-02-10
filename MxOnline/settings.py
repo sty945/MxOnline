@@ -29,6 +29,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+)
 
 # Application definition
 
