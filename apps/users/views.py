@@ -6,21 +6,27 @@ from django.views.generic import View
 # Create your views here.
 
 from .models import UserProfile
+from .forms import LoginForm
 
 
 class LoginView(View):
+    # 基于类实现需要继承的view
     def get(self, request):
         return render(request, "login.html", {})
 
     def post(self, request):
-        user_name = request.POST.get('username', '')
-        pass_word = request.POST.get('password', '')
-        user = authenticate(username=user_name, password=pass_word)
-        if user is not None:
-            login(request, user)
-            return render(request, "index.html")
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            user_name = request.POST.get('username', '')
+            pass_word = request.POST.get('password', '')
+            user = authenticate(username=user_name, password=pass_word)
+            if user is not None:
+                login(request, user)
+                return render(request, "index.html")
+            else:
+                return render(request, "login.html", {"msg": "用户名或密码错误", "login_form": login_form})
         else:
-            return render(request, "login.html", {"msg": "用户名或密码错误"})
+            return render(request, "login.html", {"login_form": login_form})
 
 
 class CustomBackend(ModelBackend):
